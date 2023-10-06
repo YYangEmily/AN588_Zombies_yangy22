@@ -1,0 +1,16 @@
+---
+title: "yangy22_OriginalHomeworkCode_03"
+author: "Emily Yang"
+date: "`r Sys.Date()`"
+output: rmdformats::readthedown
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+```{r Input}
+library(curl)
+f<- curl("https://raw.githubusercontent.com/fuzzyatelin/fuzzyatelin.github.io/master/AN588_Fall23/zombies.csv")
+d <- read.csv(f, header = TRUE, sep = ",", stringsAsFactors = FALSE)
+```
