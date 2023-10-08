@@ -64,29 +64,83 @@ par(mfrow = c(1, 2))
 hist(d$height, main = "Height Histogram")
 qqnorm(d$height, frame = FALSE, main = "Height Q-Q Plot", xlab= "Height")
 qqline(d$height, col = "steelblue")
+
 par(mfrow = c(1, 2))
 hist(d$weight, main = "Weight Histogram")
 qqnorm(d$weight, frame = FALSE, main = "Weight Q-Q Plot", xlab= "Weight")
 qqline(d$weight, col = "steelblue")
+
 par(mfrow = c(1, 2))
 hist(d$age, main = "Age Histogram")
 qqnorm(d$age, frame = FALSE, main = "Age Q-Q Plot", xlab= "Age")
 qqline(d$age, col = "steelblue")
+
 par(mfrow = c(1, 2))
 hist(d$zombies_killed, main = "Zombie Killed Histogram", xlab= "Zombie Killed")
 qqnorm(d$zombies_killed, frame = FALSE, main = "Zombie Killed Q-Q Plot")
 qqline(d$zombies_killed, col = "steelblue")
+
 par(mfrow = c(1, 2))
 hist(d$years_of_education, main = "Years of Education Histogram", xlab= "Years of Education")
 qqnorm(d$years_of_education, frame = FALSE, main = "Years of Education Q-Q Plot")
 qqline(d$years_of_education, col = "steelblue")
 
 ```
-<br> Weight, Height, and Age are normally distributed. Years of education and Zombies Killed are not normally distributed. 
+<br> Weight, Height, and Age are normally distributed. Years of education and Zombies Killed are not normally distributed. They are from a Poisson distribution. <br> 
+
 ## Question 5
 Now use the sample() function to sample ONE subset of 30 zombie survivors (without replacement) from this population and calculate the mean and sample standard deviation for each variable. Also estimate the standard error for each variable, and construct the 95% confidence interval for each mean. Note that for the variables that are not drawn from the normal distribution, you may need to base your estimate of the CIs on slightly different code than for the normal…
 ``` {r Q5}
+h<- sample(d$height, size = 30, replace = FALSE, prob = NULL)
+m<- mean(h)
+sd<- sd(h)
+sem <- sd(h)/sqrt(length(h))
+lower <- m - qnorm(1 - 0.05/2) * sem  # (1-alpha)/2 each in the upper and lower tails of the distribution
+upper <- m + qnorm(1 - 0.05/2) * sem  # (1-alpha)/2 each in the upper and lower tails of the distribution
+ci <- c(lower, upper)
+Height <-c(m, sd, sem, ci)
+Height
 
+h<- sample(d$weight, size = 30, replace = FALSE, prob = NULL)
+m<- mean(h)
+sd<- sd(h)
+sem <- sd(h)/sqrt(length(h))
+lower <- m - qnorm(1 - 0.05/2) * sem  
+upper <- m + qnorm(1 - 0.05/2) * sem 
+ci <- c(lower, upper)
+Weight <-c(m, sd, sem, ci)
+Weight
+
+h<- sample(d$age, size = 30, replace = FALSE, prob = NULL)
+m<- mean(h)
+sd<- sd(h)
+sem <- sd(h)/sqrt(length(h))
+lower <- m - qnorm(1 - 0.05/2) * sem  
+upper <- m + qnorm(1 - 0.05/2) * sem
+ci <- c(lower, upper)
+Age <-c(m, sd, sem, ci)
+Age
+
+h<- sample(d$zombies_killed, size = 30, replace = FALSE, prob = NULL)
+m<- mean(h)
+sd<- sd(h)
+pop_se <- sqrt(3/1000)
+
+ci <- c(lower, upper)
+Zkill <-c(m, sd, sem, ci)
+Zkill
+
+h<- sample(d$years_of_education, size = 30, replace = FALSE, prob = NULL)
+m<- mean(h)
+sd<- sd(h)
+pop_se <- sqrt(3/1000)
+
+ci <- c(lower, upper)
+Years <-c(m, sd, sem, ci)
+Years
+New <- rbind(Height, Weight, Age, Zkill, Years)
+colnames(New) <- c("Mean", "SD", "SE", "Lower CI", "Upper CI")
+New
 ```
 
 ## Question 6
