@@ -99,7 +99,6 @@ lower <- m - qnorm(1 - 0.05/2) * sem  # (1-alpha)/2 each in the upper and lower 
 upper <- m + qnorm(1 - 0.05/2) * sem  # (1-alpha)/2 each in the upper and lower tails of the distribution
 ci <- c(lower, upper)
 Height <-c(m, sd, sem, ci)
-Height
 
 h<- sample(d$weight, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
@@ -109,7 +108,6 @@ lower <- m - qnorm(1 - 0.05/2) * sem
 upper <- m + qnorm(1 - 0.05/2) * sem 
 ci <- c(lower, upper)
 Weight <-c(m, sd, sem, ci)
-Weight
 
 h<- sample(d$age, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
@@ -119,7 +117,6 @@ lower <- m - qnorm(1 - 0.05/2) * sem
 upper <- m + qnorm(1 - 0.05/2) * sem
 ci <- c(lower, upper)
 Age <-c(m, sd, sem, ci)
-Age
 
 h<- sample(d$zombies_killed, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
@@ -128,7 +125,6 @@ pop_se <- sqrt(3/1000)
 
 ci <- c(lower, upper)
 Zkill <-c(m, sd, sem, ci)
-Zkill
 
 h<- sample(d$years_of_education, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
@@ -137,7 +133,7 @@ pop_se <- sqrt(3/1000)
 
 ci <- c(lower, upper)
 Years <-c(m, sd, sem, ci)
-Years
+
 New <- rbind(Height, Weight, Age, Zkill, Years)
 colnames(New) <- c("Mean", "SD", "SE", "Lower CI", "Upper CI")
 New
@@ -146,8 +142,45 @@ New
 ## Question 6
 Now draw 99 more random samples of 30 zombie apocalypse survivors, and calculate the mean for each variable for each of these samples. Together with the first sample you drew, you now have a set of 100 means for each variable (each based on 30 observations), which constitutes a sampling distribution for each variable. What are the means and standard deviations of this distribution of means for each variable? How do the standard deviations of means compare to the standard errors estimated in [5]? What do these sampling distributions look like (a graph might help here)? Are they normally distributed? What about for those variables that you concluded were not originally drawn from a normal distribution?
 ``` {r Q6}
+x <- NULL
+for (i in 1:100) {
+    x[i] <- mean(sample(d$height, size = 30, replace = FALSE, prob = NULL))
+}
+Height <- c(mean(x),(sd(x)))
+hist(x, main = "100 Samples of Height")
 
+x <- NULL
+for (i in 1:100) {
+    x[i] <- mean(sample(d$weight, size = 30, replace = FALSE, prob = NULL))
+}
+Weight <- c(mean(x),(sd(x)))
+hist(x, main = "100 Samples of Weight")
+
+x <- NULL
+for (i in 1:100) {
+    x[i] <- mean(sample(d$age, size = 30, replace = FALSE, prob = NULL))
+}
+Age <- c(mean(x),(sd(x)))
+hist(x, main = "100 Samples of Age")
+
+x <- NULL
+for (i in 1:100) {
+    x[i] <- mean(sample(d$zombies_killed, size = 30, replace = FALSE, prob = NULL))
+}
+Zkill <- c(mean(x),(sd(x)))
+hist(x, main = "100 Samples of Zombies Killed")
+
+x <- NULL
+for (i in 1:100) {
+    x[i] <- mean(sample(d$years_of_education, size = 30, replace = FALSE, prob = NULL))
+}
+Years <- c(mean(x),(sd(x)))
+hist(x, main = "100 Samples of Years of Education")
+
+New <- rbind(Height, Weight, Age, Zkill, Years)
+colnames(New) <- c("Mean", "SD")
+New
 ```
-
-https://www.datacamp.com/tutorial/subsets-in-r 
+<br> The distributions look noramlly distributed even the ones that came from Poisson distributions because we moved the center to be the mean of 30 samples. The means are similar to before but the standard deviation dropped because we averaged between samples. <br>
+https://www.datacamp.com/tutorial/subsets-in-r <br>
 http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization 
