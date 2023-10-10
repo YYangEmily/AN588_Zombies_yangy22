@@ -61,18 +61,18 @@ There is a generally positive trend between age and height or weight. This makes
 Using histograms and Q-Q plots, check whether the quantitative variables seem to be drawn from a normal distribution. Which seem to be and which do not (hint: not all are drawn from the normal distribution)? For those that are not normal, can you determine from which common distribution they are drawn?
 ``` {r Q4}
 par(mfrow = c(1, 2))
-hist(d$height, main = "Height Histogram")
-qqnorm(d$height, frame = FALSE, main = "Height Q-Q Plot", xlab= "Height")
+hist(d$height, main = "Height Histogram", xlab= "Height")
+qqnorm(d$height, frame = FALSE, main = "Height Q-Q Plot")
 qqline(d$height, col = "steelblue")
 
 par(mfrow = c(1, 2))
-hist(d$weight, main = "Weight Histogram")
-qqnorm(d$weight, frame = FALSE, main = "Weight Q-Q Plot", xlab= "Weight")
+hist(d$weight, main = "Weight Histogram", xlab= "Weight")
+qqnorm(d$weight, frame = FALSE, main = "Weight Q-Q Plot")
 qqline(d$weight, col = "steelblue")
 
 par(mfrow = c(1, 2))
-hist(d$age, main = "Age Histogram")
-qqnorm(d$age, frame = FALSE, main = "Age Q-Q Plot", xlab= "Age")
+hist(d$age, main = "Age Histogram", xlab= "Age")
+qqnorm(d$age, frame = FALSE, main = "Age Q-Q Plot")
 qqline(d$age, col = "steelblue")
 
 par(mfrow = c(1, 2))
@@ -122,7 +122,7 @@ h<- sample(d$zombies_killed, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
 sd<- sd(h)
 pop_se <- sqrt(3/1000)
-
+# Not sure how to do the Confidence Intervals
 ci <- c(lower, upper)
 Zkill <-c(m, sd, sem, ci)
 
@@ -130,7 +130,7 @@ h<- sample(d$years_of_education, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
 sd<- sd(h)
 pop_se <- sqrt(3/1000)
-
+# Not sure how to do the Confidence Intervals
 ci <- c(lower, upper)
 Years <-c(m, sd, sem, ci)
 
