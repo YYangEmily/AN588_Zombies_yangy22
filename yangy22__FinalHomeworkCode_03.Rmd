@@ -36,13 +36,13 @@ Use {ggplot} to make boxplots of each of these variables by gender.
 ``` {r Q2}
 library(ggplot2)
 p <- ggplot(d, aes(x=gender, y=height, color=gender)) + geom_boxplot() #color each boxplot
-p + ggtitle("Age vs Height") + xlab("Gender") + ylab("Height") # Add axis labels
+p + ggtitle("Gender vs Height") + xlab("Gender") + ylab("Height") # Add axis labels
 q <- ggplot(d, aes(x=gender, y=weight, color=gender)) + geom_boxplot()
-q + ggtitle("Age vs Weight") + xlab("Gender") + ylab("Weight")
+q + ggtitle("Gender vs Weight") + xlab("Gender") + ylab("Weight")
 r <- ggplot(d, aes(x=gender, y=zombies_killed, color=gender)) + geom_boxplot()
-r + ggtitle("Age vs Zombies Killed") + xlab("Gender") + ylab("Zombies Killed")
+r + ggtitle("Gender vs Zombies Killed") + xlab("Gender") + ylab("Zombies Killed")
 s <- ggplot(d, aes(x=gender, y=years_of_education, color=gender)) + geom_boxplot()
-s + ggtitle("Age vs Years of Education") + xlab("Gender") + ylab("Years of Education")
+s + ggtitle("Gender vs Years of Education") + xlab("Gender") + ylab("Years of Education")
 
 ```
 
@@ -121,16 +121,18 @@ Age <-c(m, sd, sem, ci)
 h<- sample(d$zombies_killed, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
 sd<- sd(h)
-pop_se <- sqrt(3/1000)
-# Not sure how to do the Confidence Intervals
+sem <- sd(h)/sqrt(length(h))
+# Winging these confidence intervals
+lower <- m - qnorm(1 - 0.05/2) * sem  
+upper <- m + qnorm(1 - 0.05/2) * sem
 ci <- c(lower, upper)
 Zkill <-c(m, sd, sem, ci)
 
 h<- sample(d$years_of_education, size = 30, replace = FALSE, prob = NULL)
 m<- mean(h)
 sd<- sd(h)
-pop_se <- sqrt(3/1000)
-# Not sure how to do the Confidence Intervals
+sem <- sd(h)/sqrt(length(h))
+# Winging these confidence intervals
 ci <- c(lower, upper)
 Years <-c(m, sd, sem, ci)
 
@@ -181,6 +183,7 @@ New <- rbind(Height, Weight, Age, Zkill, Years)
 colnames(New) <- c("Mean", "SD")
 New
 ```
-<br> The distributions look noramlly distributed even the ones that came from Poisson distributions because we moved the center to be the mean of 30 samples. The means are similar to before but the standard deviation dropped because we averaged between samples. <br>
+<br> The distributions look normally distributed even the ones that came from Poisson distributions because we moved the center to be the mean of 30 samples. The means are similar to before but the standard deviation dropped because we averaged between samples. <br>
+
 https://www.datacamp.com/tutorial/subsets-in-r <br>
 http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization 
