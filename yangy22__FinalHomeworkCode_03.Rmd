@@ -185,5 +185,7 @@ New
 ```
 <br> The distributions look normally distributed even the ones that came from Poisson distributions because we moved the center to be the mean of 30 samples. The means are similar to before but the standard deviation dropped because we averaged between samples. <br>
 
+<br>Reflections added 10/19/23: I had challenges working with the gender and comparing it with the different variables in Question 2. I wanted to separate out the gender groups and then make the graphs and I couldn't get it to subset. I ended up finding that making it one graph automatically separates out by gender. Which should have been obvious. Another challenge I had was that I didn't know how to find the CI of the two non-normal distributions. I used the regular CI interval formula for normal distributions. Third challenge was for question 6 I didn't add the sample from question 5 I just picked 100 new samples. I assumed that since they were picked the same way it shouldn't change things very much and I didn't want to try adding data across chunks. I didn't run into any other challenges. <br>
+
 https://www.datacamp.com/tutorial/subsets-in-r <br>
 http://www.sthda.com/english/wiki/ggplot2-box-plot-quick-start-guide-r-software-and-data-visualization 
